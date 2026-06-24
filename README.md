@@ -6,11 +6,14 @@ A small but **real** NestJS application (orders / products / categories) that co
 [`typeorm-test-factory`](https://www.npmjs.com/package/typeorm-test-factory) **from npm**
 to seed integration and e2e tests against a real database.
 
+> ▶ **Run it online:** [open in StackBlitz](https://stackblitz.com/github/nestjsninja/typeorm-test-factory-demo) — it uses `sql.js` (pure-WASM SQLite), so it boots in the browser with no native build.
+
 ## The app
 
 - **TypeORM connection** wired in `AppModule` via `TypeOrmModule.forRoot(buildDataSourceOptions())`
-  ([`src/database.config.ts`](src/database.config.ts)): in-memory SQLite under test,
-  PostgreSQL when `POSTGRES_HOST` is set, a local SQLite file otherwise.
+  ([`src/database.config.ts`](src/database.config.ts)): PostgreSQL when `POSTGRES_HOST`
+  is set, otherwise `sql.js` (in-memory, pure-WASM SQLite) — which runs in Node and
+  in the browser, so the app works on StackBlitz with zero setup.
 - **Bootstrap** in [`src/main.ts`](src/main.ts).
 - **Domain**: `Category` → `Product`, and `Order` → `OrderItem` → `Product`
   ("an order has products"), with `ProductController` / `OrderController` REST endpoints.
@@ -47,4 +50,4 @@ folder next to its code; shared factories live in [`test/factories.ts`](test/fac
 | [`src/order/_test/order.service.int-spec.ts`](src/order/_test/order.service.int-spec.ts) | deep nesting (order → item → product → category), `createMany` with a shared parent, service order flow |
 | [`src/order/_test/order.e2e-spec.ts`](src/order/_test/order.e2e-spec.ts) | boots the real `AppModule`, seeds with a factory, drives the API via `supertest` |
 
-Tests use an in-memory SQLite database (`NODE_ENV=test`), so they need no external services.
+Tests use an in-memory `sql.js` database, so they need no external services and no native build.

@@ -9,20 +9,11 @@ export const entities = [Category, Product, Order, OrderItem];
 /**
  * One connection config for the whole app.
  *
- * - tests run against a throwaway in-memory SQLite database
  * - a real deployment points at PostgreSQL (via env)
- * - local dev falls back to a SQLite file so data survives restarts
+ * - everywhere else (tests, local dev, StackBlitz) uses sql.js — a pure-WASM
+ *   SQLite that needs no native build, so it runs in the browser too
  */
 export function buildDataSourceOptions(): TypeOrmModuleOptions {
-  if (process.env.NODE_ENV === 'test') {
-    return {
-      type: 'better-sqlite3',
-      database: ':memory:',
-      entities,
-      synchronize: true,
-    };
-  }
-
   if (process.env.POSTGRES_HOST) {
     return {
       type: 'postgres',
@@ -37,8 +28,9 @@ export function buildDataSourceOptions(): TypeOrmModuleOptions {
   }
 
   return {
-    type: 'better-sqlite3',
-    database: 'app.sqlite',
+    type: 'sqljs',
+    // in-memory; no file, no native module — works in Node and in WebContainers
+    autoSave: false,
     entities,
     synchronize: true,
   };
