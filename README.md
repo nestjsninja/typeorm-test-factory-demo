@@ -1,5 +1,7 @@
 # typeorm-test-factory demo
 
+[![CI](https://github.com/nestjsninja/typeorm-test-factory-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/nestjsninja/typeorm-test-factory-demo/actions/workflows/ci.yml)
+
 A small but **real** NestJS application (orders / products / categories) that consumes
 [`typeorm-test-factory`](https://www.npmjs.com/package/typeorm-test-factory) **from npm**
 to seed integration and e2e tests against a real database.
