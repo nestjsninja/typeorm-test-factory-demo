@@ -3,8 +3,8 @@ import { Test } from '@nestjs/testing';
 import { DataSource } from 'typeorm';
 import request from 'supertest';
 import { bindFactories, typeormPersister } from 'typeorm-test-factory';
-import { AppModule } from '../src/app.module';
-import { productFactory } from './factories';
+import { AppModule } from '../../app.module';
+import { productFactory } from '../../../test/factories';
 
 // Boots the real application (AppModule + its TypeORM connection) and drives it
 // over HTTP, seeding prerequisite data with the factory.

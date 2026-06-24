@@ -2,20 +2,20 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { bindFactories, typeormPersister } from 'typeorm-test-factory';
-import { buildDataSourceOptions } from '../src/database.config';
-import { Category } from '../src/category/category.entity';
-import { Product } from '../src/product/product.entity';
-import { Order } from '../src/order/order.entity';
-import { OrderItem } from '../src/order/order-item.entity';
-import { OrderModule } from '../src/order/order.module';
-import { ProductModule } from '../src/product/product.module';
-import { OrderService } from '../src/order/order.service';
+import { buildDataSourceOptions } from '../../database.config';
+import { Category } from '../../category/category.entity';
+import { Product } from '../../product/product.entity';
+import { Order } from '../order.entity';
+import { OrderItem } from '../order-item.entity';
+import { OrderModule } from '../order.module';
+import { ProductModule } from '../../product/product.module';
+import { OrderService } from '../order.service';
 import {
   orderFactory,
   orderItemFactory,
   paidOrder,
   productFactory,
-} from './factories';
+} from '../../../test/factories';
 
 describe('OrderService (integration) — an order has products', () => {
   let moduleRef: TestingModule;

@@ -7,17 +7,17 @@ import {
   typeormPersister,
   type Persister,
 } from 'typeorm-test-factory';
-import { buildDataSourceOptions } from '../src/database.config';
-import { Category } from '../src/category/category.entity';
-import { Product } from '../src/product/product.entity';
-import { ProductModule } from '../src/product/product.module';
-import { ProductService } from '../src/product/product.service';
+import { buildDataSourceOptions } from '../../database.config';
+import { Category } from '../../category/category.entity';
+import { Product } from '../product.entity';
+import { ProductModule } from '../product.module';
+import { ProductService } from '../product.service';
 import {
   categoryFactory,
   outOfStockProduct,
   premiumProduct,
   productFactory,
-} from './factories';
+} from '../../../test/factories';
 
 describe('ProductService (integration — in-memory SQLite)', () => {
   let moduleRef: TestingModule;

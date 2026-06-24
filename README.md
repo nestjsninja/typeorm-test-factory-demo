@@ -34,13 +34,15 @@ curl localhost:3000/orders/1
 npm test
 ```
 
-Every feature of the library is exercised:
+Every feature of the library is exercised. Each domain keeps its tests in a `_test`
+folder next to its code; shared factories live in [`test/factories.ts`](test/factories.ts).
 
 | Spec | Library features shown |
 |---|---|
 | [`test/factory-in-memory.spec.ts`](test/factory-in-memory.spec.ts) | `make`, `makeMany`, `with`, `Factory.is`, recursive nested `make`, `FactoryContext.index` |
-| [`test/product.service.int-spec.ts`](test/product.service.int-spec.ts) | `typeormPersister`, `Persister`, `bindFactories`, `create`/`createMany`, nested-factory relations, explicit relation override, `withPersister`, `with` states, string/name target overload |
-| [`test/order.service.int-spec.ts`](test/order.service.int-spec.ts) | deep nesting (order → item → product → category), `createMany` with a shared parent, service order flow |
-| [`test/order.e2e-spec.ts`](test/order.e2e-spec.ts) | boots the real `AppModule`, seeds with a factory, drives the API via `supertest` |
+| [`src/category/_test/category.int-spec.ts`](src/category/_test/category.int-spec.ts) | `createMany`, unique-constraint enforcement against a real DB |
+| [`src/product/_test/product.service.int-spec.ts`](src/product/_test/product.service.int-spec.ts) | `typeormPersister`, `Persister`, `bindFactories`, `create`/`createMany`, nested-factory relations, explicit relation override, `withPersister`, `with` states, string/name target overload |
+| [`src/order/_test/order.service.int-spec.ts`](src/order/_test/order.service.int-spec.ts) | deep nesting (order → item → product → category), `createMany` with a shared parent, service order flow |
+| [`src/order/_test/order.e2e-spec.ts`](src/order/_test/order.e2e-spec.ts) | boots the real `AppModule`, seeds with a factory, drives the API via `supertest` |
 
 Tests use an in-memory SQLite database (`NODE_ENV=test`), so they need no external services.
